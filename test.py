@@ -20,7 +20,7 @@ if __name__ == "__main__":
     print("Model Have Been Loaded.")
 
     checkpoint = torch.load(os.path.join(
-        hparams.checkpoint_path, 'checkpoint_11800.pth.tar'))
+        hparams.checkpoint_path, 'checkpoint_11000.pth.tar'))
     model.load_state_dict(checkpoint['model'])
     print("Sucessfully Loaded.")
 
@@ -42,10 +42,11 @@ if __name__ == "__main__":
     # mel_input = np.zeros([1, hparams.num_mels, 1], dtype=np.float32)
     # mel_input = torch.Tensor(mel_input).to(device)
     sep_list = [sep_list]
-    mel_input_target = torch.zeros(1, 80, 1).to(device)
+    # mel_input_target = torch.zeros(1, 80, 1).to(device)
 
     with torch.no_grad():
-        output = model(characters, embeddings, sep_list, mel_input_target)
+        # output = model(characters, embeddings, sep_list, mel_input_target)
+        output = model(characters, embeddings, sep_list)
         mel_output = output[1]
         # print(mel_output.size())
         mel_output = mel_output.cpu().numpy()[0].T
